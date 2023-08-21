@@ -2,7 +2,7 @@
 const CHAIN_ID = '80001';
 
 // RPC URL
-const RPC_URL =`https://polygon-mumbai.g.alchemy.com/v2/${process.env.PROJECT_ID}`;
+const RPC_URL =`https://polygon-mumbai.g.alchemy.com/v2/oEHJ_biN2E-5xXB4LDHoz_sDPq-wAmzn`;
 const ISSUER_DID = 'https://blockcerts-20230113.storage.googleapis.com/profile.json';
 const CONTROLLER = 'did:web:blockcerts-20230113.storage.googleapis.com';
 

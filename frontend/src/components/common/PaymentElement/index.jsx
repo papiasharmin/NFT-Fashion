@@ -23,11 +23,16 @@ const PaymentElement = () => {
             if (hasAPICalledRef.current) return
 
             hasAPICalledRef.current = true;
-
-            fetch(`${baseURL}/create-payment-intent`, {
-                  method: 'post'
-            }).then(data => data.json())
-                  .then(response => setPiClientSecret(response.clientSecret))
+            console.log('paymentelem',`${baseURL}/api/create-payment-intent`)
+            fetch(`${baseURL}/api/create-payment-intent`)
+                .then(data => {
+                     console.log('DATA',data.json())
+                     data.json()
+                 })
+                 .then(response => {
+                     console.log('response',response)
+                     setPiClientSecret(response.clientSecret)
+                  })
       }, [])
 
       if (!piClientSecret) return null;

@@ -8,7 +8,7 @@ import './PaymentForm.CSS';
 const PaymentForm = () => {
       const stripe = useStripe()
       const elements = useElements()
-
+      console.log('paymentform',stripe,elements)
       return (
             <form
                   style={{marginTop: '20px'}}

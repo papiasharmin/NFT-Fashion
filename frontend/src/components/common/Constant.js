@@ -9,7 +9,7 @@ export const MYTOKEN_ADDRESS = "0x03816f4A868A3e11CE6D2e71811D78fF91477ee7";
 // chain ID 
 export const CHAIN_ID = '80001';
 // rpc URL 
-export const RPC_URL = `https://polygon-mumbai.g.alchemy.com/v2/${process.env.PROJECT_ID}`;
+export const RPC_URL = `https://polygon-mumbai.g.alchemy.com/v2/oEHJ_biN2E-5xXB4LDHoz_sDPq-wAmzn`;
 // API Base URL
 export const baseURL = 'http://localhost:3001';
 // PINTA API Base URL

@@ -9,7 +9,7 @@ const crypto = require('crypto');
 const ION = require('@decentralized-identity/ion-tools')
 // ブロックチェーン機能のモジュールを読み込む
 const {
-  createKmsSigner,
+  
   sendTx,
   sendBatchTx,
   sendEth,
@@ -195,6 +195,8 @@ app.post('/api/send', async(req, res) => {
     const signer = await provider.getSigner(await wallet.getAddress())
     // create mytoken contract 
     var myTokenContract = new ethers.Contract(contractAddr.MYTOKEN_ADDRESS, MyTokenABI, signer);
+    var mcon =  new ethers.utils.Interface(MyTokenABI)
+    console.log('tokenfactorycontract',myTokenContract,mcon)
     // create factory contract
     var factoryContract = new ethers.Contract(contractAddr.FACTORY_ADDRESS, FactoryABI, signer);
     // get address from did
@@ -389,7 +391,7 @@ app.post('/api/factory/create', async(req, res) => {
   var owners = req.query.owners;
   var required = req.query.required;
   // 分割する
-  var ownerAddrs = [owners];
+  var ownerAddrs = owners;
   console.log('owneradd',ownerAddrs)
   // call send Tx function
   var result = await sendTx(
@@ -562,12 +564,12 @@ app.post('/api/wallet/execute', async(req, res) => {
  * stripeのPayment elementを使うためのAPI
  * ※ テスト用 (1400円分)
  */
-app.post("/create-payment-intent", async (req, res) => {
+app.get("/api/create-payment-intent", async (req, res) => {
   logger.debug("Payment API開始");
-
+  console.log('create-payment-intent')
   // create paymentIntent 
   const paymentIntent = await stripe.paymentIntents.create({
-    amount: 1400,
+    amount: 14,
     currency: "jpy",
     automatic_payment_methods: {
       enabled: true,

@@ -121,7 +121,7 @@ const Home = (props) => {
      */
     const sendAction = async(to, amount) => {
         setIsLoading(true);
-        
+        console.log('AMOUNT',to,amount)
         // 送金用のAPIを呼び出す
         superAgent
             .post(baseURL + '/api/send')

@@ -96,7 +96,7 @@ const Wallets = (props) => {
             } else {
                 multiSigWallets = await getWallets(10, 0);
             }
-           
+           console.log('WALLET',multiSigWallets,count)
             // コントラクトとアカウントの情報をステート変数に格納する。
             setAccount(currentAccount);
             setWallets(multiSigWallets);

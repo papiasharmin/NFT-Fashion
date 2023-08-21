@@ -43,7 +43,7 @@ const Buy = (props) => {
        */
       const buyAction = async() => {
             setIsLoading(true);
-
+            console.log('buyaction',amount)
             // IDQToken発行APIを呼び出す
             superAgent
                   .post(baseURL + '/api/mintToken')

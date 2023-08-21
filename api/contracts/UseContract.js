@@ -201,7 +201,7 @@ const sendEth = async(to, value, rpc_url, chainId) => {
 
 
 module.exports = { 
-    createKmsSigner,
+    
     sendTx,
     sendBatchTx, 
     sendEth,
