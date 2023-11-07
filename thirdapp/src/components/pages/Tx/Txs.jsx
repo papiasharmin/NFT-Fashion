@@ -386,7 +386,7 @@ const Txs = (props) => {
                                             }
                                             </>
                                             :
-                                            <h3>No Transaction Yet</h3>
+                                            <h2 style={{color:'whitesmoke'}}>No Transaction Yet</h2>
                                     }
                                         
                               
