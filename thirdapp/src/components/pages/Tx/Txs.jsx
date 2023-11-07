@@ -300,7 +300,7 @@ const Txs = (props) => {
     return(
         <div className="parent-div">
             <Header/>
-           <div className="buy-centerdiv">
+           <div className="txs">
                 {isLoading ? (
                     
                         <header className="loading">
@@ -345,7 +345,7 @@ const Txs = (props) => {
                                             
                                                
                                             />
-                                    <div style={{display:'flex',justifyContent:'center',alignItems:'center',gap:'10px'}}> 
+                                    <div style={{display:'flex',justifyContent:'center',alignItems:'center',gap:'20px'}}> 
                                     <button className='button' onClick={createAction}>Create</button>
                                     <button className='button' onClick={(e) => {setCreateFlg(false)}}>Cancel</button>
                                     </div>
@@ -354,11 +354,19 @@ const Txs = (props) => {
                         ) : (
                             <>
                            
-                             <div style={{display:'flex',flexDirection:'column',justifyContent:'center',alignItems:'center',gap:'10px'}}>     
-                                <p><strong>Transaction Info</strong></p>
+                             <div style={{display:'flex',flexDirection:'column',justifyContent:'center',alignItems:'center',gap:'10px',width:'100%'}}>     
+                                <h3 style={{color:'whitesmoke'}}>Transaction Info</h3>
                                   
                                 { txs.length > 0 ?
-                                         <>   
+                                         <> 
+                                             <div className="coininfo" style={{backgroundColor:'whitesmoke',color:'black',width:'100%'}}>
+                                                 <p>NO.</p>
+                                                <p>Recipiant</p>
+                                                <p>Amount</p>
+                                                <p> Approvals/Required</p>
+                                                <p> Executed </p>
+                                                <p>Actions</p>
+                                            </div>  
                                            {txs.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                                                 .map((row, i) => {
                                                    
@@ -383,10 +391,9 @@ const Txs = (props) => {
                                         
                               
                            
-                                <div
-                                >
-                                    <button onClick={(e) => {setCreateFlg(true)}}>Create Transaction</button>
-                                </div>
+                               
+                                    <button className="button"  onClick={(e) => {setCreateFlg(true)}}>Create Transaction</button>
+                                
                             </div>
                             </>
                         ) }

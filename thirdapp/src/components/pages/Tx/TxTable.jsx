@@ -53,13 +53,13 @@ const TxTable = (props) => {
 
 
     return (
-        <div className="coininfo">
-        <p>{index+1}</p>
-        <p>{row.to}</p>
+        <div className="coininfo" style={{width:'100%'}}>
+        <p>{index+1}.</p>
+        <p>{ (row.to).substr(0, 12) + '...' + row.to.substr(row.to.length - 3, 3)}</p>
         <p>{ethers.utils.formatEther( Number(row.value).toString())}</p>
         <p> {approved} / {required}</p>
         <p>{isExecuted ? "Executed" : "Not Executed"} </p>
-        <div>
+        <div style={{display:'flex',flexDirection:'column', gap:'5px'}}>
             <button className='button-outline' onClick={()=>approveAction(index)}>Approve</button>
             <button className='button-outline' onClick={()=>revokeAction(index)}>Revoke</button>
             <button className='button-outline' onClick={()=>executeAction(index)}>Execute</button>

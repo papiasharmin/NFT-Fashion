@@ -15,7 +15,7 @@ export const LOYALTY_CONTRACT_ADRESS = "0x0124c5Ee2614b64b10143CB8ae0CdE761347fa
 export const CHAIN_ID = '80001';//'11155111''1440002';//
 // rpc URL 
 export const RPC_URL = `https://polygon-mumbai.g.alchemy.com/v2/EgiLkcIuRCG4PwoZiyRTVkYMcZrT8ynP`;//`https://eth-sepolia.g.alchemy.com/v2/3fMr3CwsUtbgtcenWRgX9A0Cx9tkOfVr`;//`https://rpc-evm-sidechain.xrpl.org`;//
-export const baseURL =`http://localhost:3001`;//`https://idq-api.vercel.app`;
+export const baseURL =`https://idqapiupdated.vercel.app`; //`http://localhost:3001`;//`https://idq-api.vercel.app`;
 
 export const THIRDWEB_CLIENT_ID='5a03bef726be21435934217a8422c761';
 // PINTA API Base URL

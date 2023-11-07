@@ -19,7 +19,7 @@ const WalletDialog = (props) => {
 
     return (
         <>
-        <div className='overlay'></div>
+        
             <div className='walletdetail'>
                 <p>
                     Deposit to Wallet 
@@ -40,7 +40,7 @@ const WalletDialog = (props) => {
                        
                 </div>
                 
-                <div>
+                <div style={{display:'flex',justifyContent:'center',alignItems:'center', gap:'20px'}}>
                     <button className='button' onClick={depositAction}>Deposit</button> 
                     <button className='button' onClick={handleClose}>Cancel</button> 
                 </div>
