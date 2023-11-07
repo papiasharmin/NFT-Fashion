@@ -1,0 +1,145 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300&family=Roboto:wght@100;300;400&display=swap');
+
+
+.background{
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    overflow: auto;
+    background-color: #202020;
+    /* background: linear-gradient(223.85deg, #000000 30.01%, rgba(1, 7, 21, 0.73) 98.65%),linear-gradient(0deg, #FFFFFF, #FFFFFF); */
+}
+
+.blur{
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    background-color: #000000e7;
+
+    .center{
+        height: 40%;
+        width: 30%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;  
+        box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+        >img{
+            height: 6rem;
+            width: 6rem;
+        }
+        >input{
+            height: 2.4rem;
+            width: 90%;
+            border-radius: 2rem;
+            padding: 1rem;
+            border: none;
+        }
+        >a{
+            height: 2.4rem;
+            border-radius: 2rem;
+            >button{
+                height: 3rem;
+                width: 8rem;
+                cursor: pointer;
+                color: #FFFFFF;
+                background-color: rgba(18, 99, 180, 1);
+                border-radius: 2rem;
+                position: absolute;
+                left: 50%;
+                transform: translate(-50%,0%);
+            }
+        }
+    }
+}
+
+.logo{
+    height: 4rem;
+    width: 4rem;
+    margin-bottom: 2rem;
+    cursor: pointer;
+}
+.logo>img{
+    height: 100%;
+    width: 100%;
+}
+
+.inputs{
+    height: 10rem;
+    width: 20%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.inputs>input{
+    padding: 1rem;
+    height: 2rem;
+    width: 80%;
+    margin-bottom: 1rem;
+    border-radius: 2rem;
+    border: none;
+    outline: none;
+}
+.inputs>a{
+    height: 1.5rem;
+    text-decoration: none;
+    color: #FFFFFF;
+    /* margin-left: 3.5rem; */
+}
+
+.buttons{
+    height: 2.4rem;
+    width: 14%;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.btn1{
+    height: 100%;
+    width: 40%;
+    padding: 4% 0% 0% 4%;
+    cursor: pointer;
+    border-radius: 2rem;
+    display: block;
+    align-items: center;
+    justify-content: center;
+    background-color: #1263B4;
+    >a{
+        color: #FFFFFF;
+        text-decoration: none;
+        margin-left: 8%;
+    }
+    transition: 0.4s;
+}
+
+.btn1:hover{
+    background-color: #458ad0;
+    >a{
+        color: #e7f3ff;
+    }
+    margin-bottom: 0.8rem;
+}
+
+@media screen and (max-width:820px) {
+    .inputs{
+        width: 200px;
+    }
+    .buttons{
+        width: 200px;
+    }
+
+    .blur>.center>input{
+        width: 200px;
+    }
+}

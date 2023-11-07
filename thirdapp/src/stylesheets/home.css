@@ -1,0 +1,182 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300&family=Roboto:wght@100;300;400&display=swap');
+
+body{
+    position: absolute;
+}
+
+.backdiv{
+    position: absolute;
+    height: 100%;
+    width: 85%;
+    top: 0;
+    left: 12%;
+    padding-top: 4%;
+    background-color: #202020;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.headback{
+    height: 55vh;
+    width: 40vw;
+    border-radius: 2rem;
+    position: absolute;
+    top: 13%;
+    background-color: #fbfaf5;
+    left: 5%;
+}
+
+.headlines{
+    color: #333332;
+    height: 20vh;
+    width: 30vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: absolute;
+    top: 15vh;
+    left: 5vw;
+    >h1{
+        margin-bottom: 1rem;
+        color: #2746ae;
+        font-size: 90px;
+    }
+}
+
+@keyframes slidein {
+    from {
+        margin-left: 5vw;
+    }
+  
+    to {
+        margin-left: 7vw;
+    }
+}
+
+.data{
+    position: absolute;
+    background-color: #fbfaf5;
+    right: 3%;
+    top: 13%;
+    height: 50vh;
+    width: 30vw;
+    color: #333332;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 2rem;
+    >h1{
+        margin-bottom: 2rem;
+        color: #113582;
+    }
+    >h3{
+        margin-bottom: 1rem;
+        color: #333332;
+        transition: all 0.4s;
+        &:hover{
+            color: black;
+        }
+    }
+}
+
+.contacts{
+    color: #fefefe;
+    position: absolute;
+    bottom: 0;
+    left: 2%;
+    height: 6rem;
+    width: 20vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    >.media{
+        height: 3rem;
+        width: 10rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+
+        >a>i{
+            color: #c2c2c2;
+            font-size: 1.5rem;
+            transition: all 0.4s;
+            &:hover{
+                margin-bottom: 1rem;
+                color: rgb(254, 254, 254);
+            }
+        }
+    }
+}
+
+#wallet-connecting-button{
+    text-decoration: none;
+    height: 4rem;
+    width: 30%;
+    position: absolute;
+    bottom: 20%;
+    right: 7%;
+    margin-top: 1rem;
+    >button{
+        height: 100%;
+        width: 100%;
+        border: none;
+        outline: none;
+        background-color: #2857bd;
+        color: white;
+        font-size: large;
+        font-weight: 700;
+        letter-spacing: 2px;
+        border-radius: 0.5rem;
+        transition: all 0.4s cubic-bezier(0.445, 0.05, 0.55, 0.95);
+        &:hover{
+            cursor: pointer;
+            background-color: #3977ff;
+            color: rgb(255, 255, 255);
+            font-size: large;
+        }
+    }
+}
+
+@media screen and (max-width:912px) {
+    .headback{
+        width: 100%;
+        position: absolute;
+        top: 20%;
+        left: 50%;
+        transform: translate(-50%);
+
+        >.headlines{
+            height: 40%;
+            width: 90%;
+        }
+    }
+
+    .data{
+        width: 90%;
+        position: absolute;
+        top: 80%;
+        left: 50%;
+        transform: translate(-50%);
+        padding: 20px;
+    }
+
+    .contacts{
+        width: 50%;
+        position: absolute;
+        top: 150%;
+        left: 0;
+    }
+
+    #wallet-connecting-button{
+        position: absolute;
+        height: 50px;
+        bottom: -42%;
+        right: 35%;
+        z-index: 6;
+    }
+}
+

@@ -1,0 +1,53 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300&family=Roboto:wght@100;300;400&display=swap');
+
+.centerbox{
+    height: 40%;
+    width: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    font-family: 'Roboto', sans-serif;
+    color: white;
+
+    >input{
+        width: 12rem;
+        height: 1.9rem;
+        margin-bottom: 2rem;
+        border-radius: 2rem;
+        outline: none;
+        border-style: none;
+        padding-left: 1rem;
+    }
+    >a{
+        text-decoration: none;
+    }
+}
+.logo{
+    height: 4rem;
+    width: 4rem;
+}
+
+.verify{
+    height: 2rem;
+    width: 5rem;
+    background-color: aliceblue;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #1263B4;
+    cursor: pointer;
+    border-radius: 2rem;
+    color: #FFFFFF;
+}
+
+.verify:hover{
+    background-color: #458ad0;
+    >a{
+        color: #e7f3ff;
+    }
+}

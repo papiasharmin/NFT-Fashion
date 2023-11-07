@@ -1,0 +1,58 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300&family=Roboto:wght@100;300;400&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+}
+body{
+    height: 100%;
+    width: 100%; 
+    background-color: #202020;
+}
+
+.parent-div{
+    height: 100%;
+    width: 100%;
+    display: flex;
+}
+
+.button{
+    width: fit-content;
+    padding: 5px 10px;
+    height: 2.5rem;
+    border-style: none;
+    background-color: rgb(14, 64, 149);
+    color: white;
+    border-radius: 10px;
+    font-size: 18px;
+    font-weight: 500;
+    margin-top: 10px;
+    &:hover{
+        background-color: rgb(14, 77, 185);
+    }
+}
+
+.button-outline{
+    width: fit-content;
+    padding: 5px 10px;
+    height: 2.5rem;
+    border: 1px solid lightgray;
+    background-color: rgb(229, 232, 237);
+    color: black;
+    border-radius: 10px;
+    font-size: 18px;
+    font-weight: 500;
+    &:hover{
+        background-color: rgb(14, 77, 185);
+    }
+}
+
+.overlay{
+    width: 100vw;
+    height: 100vh;
+    opacity: 0.8;
+    background-color: gray;
+
+}

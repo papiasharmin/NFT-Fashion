@@ -1,0 +1,113 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300&family=Roboto:wght@100;300;400&display=swap');
+
+body{
+    position: absolute;
+}
+
+.basebox{
+    position: absolute;
+    height: 100%;
+    width: 85%;
+    top: 0;
+    left: 12%;
+    background-color: #050505;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.upperportion{
+    position: absolute;
+    height: 50vh;
+    width: 97.5%;
+    left: 50%;
+    transform: translate(-50%);
+    >img{
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+    }
+}
+
+.walletdetail{
+    padding: 10px 20px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 50%;
+    background-color: whitesmoke;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    gap: 20px;
+    padding-top: 20px;
+    font-size: 1.5rem;
+    border-radius: 10px;
+    z-index: 2;
+}
+
+.status{
+    text-align: center;
+    height: 30vh;
+    width: 30vw;
+    padding: 40px;
+    position: absolute;
+    background-color: rgba(143, 140, 140, 0.649);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50% ,-50%);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: white;
+    border-radius: 0.5rem;
+    >h1{
+        margin-top: 2rem;
+    }
+}
+
+.lowerportion{
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%);
+    height: auto;
+    width: 97.5%;
+    /* background-color: rgba(240, 248, 255, 0.295); */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    overflow: hidden;
+}
+
+.coininfo{
+    flex-wrap: wrap;
+    justify-content: space-around;
+    height: -moz-fit-content;
+    height: fit-content;
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    color: #ffffff;
+    border-color: rgb(188, 188, 188);
+    box-shadow: 0px 2px #88888859;
+    cursor: pointer;
+    border-radius: 0.5rem;
+    border: 1px solid whitesmoke;
+    color: whitesmoke
+
+}
+
+@media screen and (max-width:912px) {
+    .status{
+        width: 80%;
+        height: 50%;
+        >h1{
+            font-size: 1.5rem;
+        }
+    }
+}

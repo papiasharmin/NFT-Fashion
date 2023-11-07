@@ -1,0 +1,60 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300&family=Roboto:wght@100;300;400&display=swap');
+
+body{
+    position: absolute;
+}
+
+#upload-headline{
+    position: absolute;
+    top: 15%;
+}
+
+.upload-input{
+    height: 40%;
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    >input{
+        width: 80%;
+        height: 2rem;
+        margin-bottom: 1rem;
+        border-radius: 2rem;
+        outline: none;
+        border-style: none;
+        background-color: rgb(219, 219, 219);
+        color: black;
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+    >button{
+        width: 5vw;
+        height: 2.5rem;
+        border-style: none;
+        background-color: rgb(14, 64, 149);
+        color: white;
+        border-radius: 2rem;
+        &:hover{
+            background-color: rgb(14, 77, 185);
+        }
+    }
+}
+
+#Token{
+    outline: none;
+    height: 2rem;
+    width: 80%;
+    margin-bottom: 2rem;
+    background-color: rgb(219, 219, 219);
+    border-style: none;
+    padding-left: 0.8rem;
+}
+
+@media screen and (max-width:912px) {
+    .upload-input{
+        >button{
+            width: 40%;
+        }
+    }
+}

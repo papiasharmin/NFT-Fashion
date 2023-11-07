@@ -1,0 +1,106 @@
+.centerdiv{
+    height: 60vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logodiv{
+    width: 6rem;
+    height: 6rem;
+    >img{
+        height: 100%;
+        width: 100%;
+    }
+}
+
+.inputs-area{
+    width: 20vw;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+
+    >input{
+        height: 2rem;
+        width: 100%;
+        border-radius: 2rem;
+        margin-bottom: 1rem;
+        padding-left: 1rem;
+        outline: none;
+        border-style: none;
+    }
+}
+
+.username{
+    display: flex;
+    justify-content: space-between;
+    width: auto;
+    >input{
+        height: 2rem;
+        width: 45%;
+    }
+}
+
+.dob{
+    display: flex;
+    justify-content: space-between;
+    width: auto;
+    >input{
+        height: 2rem;
+        width: 30%;
+    }
+}
+
+.fields{
+    padding-left: 1rem;
+    border-radius: 2rem;
+    outline: none;
+    border-style: none;
+    margin: 0.3rem;
+}
+
+.submit{
+    height: 2rem;
+    width: 5rem;
+    display: flex;
+    flex-direction: center;
+    align-items: center;
+    text-align: center;
+    padding-left: 1rem;
+    background-color: #1263B4;
+    cursor: pointer;
+    border-radius: 2rem;
+    >a{
+        text-decoration: none;
+        text-align: center;
+        color: white;
+    }
+}
+
+.submit:hover{
+    background-color: #458ad0;
+    >a{
+        color: #e7f3ff;
+    }
+}
+
+
+@media screen and (max-width:820px) {
+    .centerdiv{
+        width: 100%;
+    }
+
+    .inputs-area{
+        width: 60%;
+        >input{
+            width: 100%;
+        }
+    }
+    .submit{
+        height: 3rem;
+        width: 5rem;
+    }
+}

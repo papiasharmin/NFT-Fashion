@@ -1,0 +1,65 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300&family=Roboto:wght@100;300;400&display=swap');
+
+body{
+    position: absolute;
+}
+
+#create-headline{
+    position: absolute;
+    top: 15%;
+    color: black;
+}
+
+.name-input{
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+   
+    justify-content: flex-start;
+    >input{
+        width: 80%;
+        height: 2rem;
+        border-radius: 2rem;
+        outline: none;
+        border-style: none;
+        background-color: rgb(219, 219, 219);
+        color: black;
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+    >button{
+
+    align-self: center;
+    width: fit-content;
+    height: 2.5rem;
+    border-style: none;
+    background-color: rgb(14, 64, 149);
+    color: white;
+    border-radius: 2rem;
+        &:hover{
+            background-color: rgb(14, 77, 185);
+        }
+    }
+}
+
+.input{
+    width: 80%;
+    height: 2rem;
+    border-radius: 2rem;
+    outline: none;
+    border-style: none;
+    background-color: rgb(219, 219, 219);
+    color: black;
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+@media screen and (max-width:912px) {
+    .buy-centerdiv{
+        width: 80%;
+    }
+
+    .name-input>button{
+        width: 20vw;
+    }
+}
