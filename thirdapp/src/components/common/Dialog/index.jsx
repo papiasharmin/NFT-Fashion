@@ -41,7 +41,8 @@ const WalletDialog = (props) => {
                 </div>
                 
                 <div>
-                    <button className='button' onClick={depositAction}>deposit</button> 
+                    <button className='button' onClick={depositAction}>Deposit</button> 
+                    <button className='button' onClick={handleClose}>Cancel</button> 
                 </div>
              </div>
         </>

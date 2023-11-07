@@ -223,7 +223,7 @@ const handleChangeRowsPerPage = (e) => {
 };
 
 const getwalletDetails = async(wallet)=>{
-    setIsLoadingdetail(true)
+    
     const { 
         wName,
         required,
@@ -235,8 +235,9 @@ const getwalletDetails = async(wallet)=>{
         
         
         if(wName || required || counts ||ownersaddr||balance ){
+
         setIsLoadingdetail(false)
-        setShowWalletDetails(true)
+        //setShowWalletDetails(true)
     }
     console.log('details',   wName,
     required,
@@ -322,7 +323,7 @@ useEffect(()=>{
                <div className="upperportion">
                  <img src={chart} alt="" />
                  <div className="status">
-                    <h1>Your wallets</h1>
+                    <h1>Your MultiSignature Wallets</h1>
                  </div>
                </div>
                <div className="lowerportion">
@@ -333,11 +334,13 @@ useEffect(()=>{
                               <h3 style={{color:'whitesmoke'}}>{`${index+1}.`}</h3>
                               <h3 style={{color:'whitesmoke'}}>{item}</h3>
                               <button className="button-outline" onClick={async ()=>{ 
+                                    setShowWalletDetails(true);
+                                    setIsLoadingdetail(true);
                                     getwalletDetails(item); 
                               }}>
                                      Dtails
                               </button>
-                              <button className="button-outline" onClick={depositAction} >Deposite</button>
+                              <button className="button-outline" onClick={()=>setOpen(true) }>Deposite</button>
                               <button className="button-outline" onClick={()=>deleteaction(index)} >Remove</button>
                            </li>)
                           })
@@ -369,17 +372,17 @@ useEffect(()=>{
          
 
                   <div  className='walletdetail' style={{width:'60%',height:'65%'}}>
-                                  <p style={{fontSize:'20px', fontWeight:400, color:'dodgerblue'}}>{`${walletDetails.wName} Deatils`}</p>
-                                  <p style={{backgroundColor:'skyblue', padding:'10px', color:'white',width:'40%', borderRadius:'5px'}}>EVM XRP Sidechain</p>
-                                  <p><span style={{color:'#c344fa', fontSize:'18px'}}>Address</span> : { `${walletDetails.wallet}`}</p>
+                                  <p style={{fontSize:'20px', fontWeight:400, color:'rgb(14, 77, 185)'}}>{`${walletDetails.wName} Deatils`}</p>
+                                  <p style={{backgroundColor:'whitesmoke', padding:'10px', color:'white',width:'40%', borderRadius:'5px'}}>EVM XRP Sidechain</p>
+                                  <p><span style={{color:'rgb(14, 77, 185)', fontSize:'18px'}}>Address</span> : { `${walletDetails.wallet}`}</p>
                                   <div style={{display:'flex', justifyContent:'center',alignContent:'center', gap:'20px', border:'1px solid gray',padding:'5px', width:'25%'}}>
                                   <FontAwesomeIcon icon={faCopy} />
                                   <FontAwesomeIcon icon={faQrcode} />
                                   </div>
-                                  <p><span style={{color:'#c344fa', fontSize:'18px'}}>Required</span> : {`${walletDetails.required}/${walletDetails.counts}`}</p>
-                                  <p><span style={{color:'#c344fa', fontSize:'18px'}}>Total Balance</span> : {`${walletDetails.balance} XRP`}</p>
+                                  <p><span style={{color:'rgb(14, 77, 185)', fontSize:'18px'}}>Required</span> : {`${walletDetails.required}/${walletDetails.counts}`}</p>
+                                  <p><span style={{color:'rgb(14, 77, 185)', fontSize:'18px'}}>Total Balance</span> : {`${walletDetails.balance} XRP`}</p>
                                   
-                                  <Link to={"/txs"} state={{addr: walletDetails.wallet}} style={{borderRadius:'5px',textDecoration:'none',backgroundColor:'#c344fa',color:'white', padding:'10px',width:'50%', fontSize:'18px', fontWeight:400}}>
+                                  <Link to={"/txs"} state={{addr: walletDetails.wallet}} style={{borderRadius:'5px',textDecoration:'none',backgroundColor:'rgb(14, 77, 185)',color:'white', padding:'10px',width:'50%', fontSize:'18px', fontWeight:400}}>
                                       Transactions
                                   </Link>
 
@@ -394,7 +397,8 @@ useEffect(()=>{
             
             
             
-            : <div>
+            : 
+            <div className='walletdetail' style={{width:'60%',height:'65%'}}>
                 <LoadingIndicator/>
             </div>
              }

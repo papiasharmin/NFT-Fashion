@@ -153,7 +153,7 @@ const Create = (props) => {
         <div className='parent-div'>
         <Header/>
         <div className="buy-centerdiv">
-            <h2 id='create-headline'>Create New Wallet</h2>
+            <h2 id='create-headline'>Create Multisignature Wallet</h2>
             <form className="name-input" onSubmit={createAction}>
                 <input type="text" placeholder="Enter Wallet Name" required/>
                 <div style={{display:'flex',gap:'20px',marginTop:'10px', marginBottom:'10px'}}>

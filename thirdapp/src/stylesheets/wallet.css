@@ -51,7 +51,7 @@ body{
 .status{
     text-align: center;
     height: 30vh;
-    width: 30vw;
+    width: fit-content;
     padding: 40px;
     position: absolute;
     background-color: rgba(143, 140, 140, 0.649);

@@ -163,7 +163,7 @@ const copy = () => {
               <Route path="/Myvc" exact element={ <MyVC /> } />
               <Route path="/Upload" exact element={ <Upload /> } />
               <Route path="/Verify" exact element={ <Verify/> } />
-              <Route path="/Nfts" exact element={ <Nfts/> } />
+              
               <Route path="/Swaptoken" exact element={ <Example/> } />
               <Route path="*" exact element={ <NoPage/> } />
             </Routes>
@@ -178,3 +178,5 @@ const copy = () => {
 }
 
 export default App;
+
+//<Route path="/Nfts" exact element={ <Nfts/> } />

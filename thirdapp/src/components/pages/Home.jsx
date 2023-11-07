@@ -283,9 +283,7 @@ const Home = (props) => {
                 <Link to={'/buy'}>
                     <button className='button'>Buy Token</button>
                 </Link>
-                <Link to={'/nfts'}>
-                    <button className='button'>NFTs</button>
-                </Link>
+               {/**/}
                 </div>
                 <h3 style={{marginBlock:'10px'}}>Your DID: {did}</h3>
                 <h3>IDQ Token Balance: {balance}</h3>
@@ -360,3 +358,8 @@ const Home = (props) => {
 };
 
 export default Home;
+
+
+<Link to={'/nfts'}>
+<button className='button'>NFTs</button>
+</Link>
