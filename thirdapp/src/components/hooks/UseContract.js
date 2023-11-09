@@ -1,6 +1,3 @@
-/**
- * スマートコントラクトやウォレット接続などのWeb3関連の処理をまとめたhookコンポーネントファイル
- */
 
 //import Web3 from 'web3';
 import MultiSigWallet from './../../contracts/MultiSigWallet.json';
