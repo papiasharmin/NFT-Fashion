@@ -1,4 +1,4 @@
-import { ConnectWallet, useAddress, useSigner, useContract, useUnclaimedNFTSupply, useLazyMint, Web3Button } from "@thirdweb-dev/react";
+import { ConnectWallet, useAddress, useSigner, useContract, useUnclaimedNFTSupply, useLazyMint, Web3Button, useEmbeddedWalletUserEmail, useEmbeddedWallet } from "@thirdweb-dev/react";
 
 import NextLink from 'next/link';
 import { NextPage } from "next";
@@ -30,7 +30,8 @@ const Register: NextPage = () => {
     const [getkey, setGetKey] = useState(false);
     const [deployedContract, setdeployedContract ] = useState([]);//0x3576d5E1c1797102a4d9702dD7D6714928bCF241
     const userAddr = useAddress();
-
+    const email = useEmbeddedWalletUserEmail();
+    
 
 
     const { contract } = useContract('0x611D059db8ad17a13167b2373267Fc7a334b7be0');
@@ -123,7 +124,8 @@ const Register: NextPage = () => {
             <Box pr='10%' justifySelf='flex-start' alignSelf='center' mt='10px'>
               {isCreate?
                 mint ?
-                <form>
+                <form onSubmit={()=>lazyMint({metadatas:nftmetadata})}>
+                  <FormLabel>How Many NFTs you Want To Mint</FormLabel>
                   <Input type="number" onChange={(e)=>{
                      let arr = []
                     for(let i=0; i < +e.target.value; i++){
@@ -134,15 +136,18 @@ const Register: NextPage = () => {
                     }
                   
                     }
+                    required
                     />
                   {
                     nftmetadata.length > 0 ? 
                      <>
-                        <FormLabel>Give contract description</FormLabel>
-                        <Input type="text" w='50%' h='50%' defaultValue={nftmetadata}/>
+                        <FormLabel>Edit the name, description, media and other fields for each NFT</FormLabel>
+                        <Input type="text" w='100%' h='100%' defaultValue={nftmetadata} onChange={(e)=>setNftmetadata(e.target.value)} required/>
                      </>
                       : ""
                   }
+                  
+                  <Button>Mint</Button>
 
                 </form>
                 :
@@ -165,9 +170,9 @@ const Register: NextPage = () => {
                       <Input type='text' placeholder="Description" value={description} onChange={(e)=> setDescription(e.target.value)} required/>
                       <FormLabel mt='5px'>Enter Your wallet private key</FormLabel>
                       <Input type='text' placeholder="Key" value={key} onChange={(e)=> setKey(e.target.value)} required/>  
-                      {isembadded && <Button type="button" mt='5px' onClick={()=> setGetKey(true)}>Get Key!</Button>}
+                      {email ? <Button type="button" mt='5px' onClick={()=> setGetKey(true)}>Get Key!</Button> :""}
                   </FormControl>
-                  <Flex>
+                  <Flex mt='10px'>
                     <Button type="submit">Deploy</Button>
                     <Spacer/>
                     <Button type="button" onClick={()=> setisCreate(false)}>Cancel</Button>

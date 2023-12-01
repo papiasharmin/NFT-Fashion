@@ -1,7 +1,8 @@
 import {NextApiRequest, NextApiResponse} from "next";
 import { ThirdwebSDK } from "@thirdweb-dev/sdk"; 
 import { KlaytnTestnetBaobab, Mumbai} from "@thirdweb-dev/chains";
-
+import { contractdata } from "../../components/data";
+import fs from 'fs';
 export default async function handeler(
     req:NextApiRequest,
     res:NextApiResponse
@@ -34,6 +35,50 @@ export default async function handeler(
         '4.1.0'
   
       );
+
+      if(contractAddress){
+       
+
+// Data to be written to the JSON file
+const dataToWrite = {
+    user:address,
+    contract:[contractAddress]
+};
+
+// Specify the file path
+const filePath = '../../components/data';
+
+fs.readFile(filePath, 'utf8', (err, data) => {
+  if (err) {
+    console.error('Error reading JSON file:', err);
+  } else {
+    // Parse the JSON string into a JavaScript object
+
+    
+    fs.writeFile(filePath, jsonData, (err) => {
+      if (err) {
+        console.error('Error writing to JSON file:', err);
+      } else {
+        console.log('Data has been written to the JSON file successfully!');
+      }
+    });
+    console.log('Data read from the JSON file:', data);
+  }
+});
+
+// Convert JavaScript object to JSON string
+const jsonData = JSON.stringify(dataToWrite, null, 2);
+
+// Writing to the JSON file
+fs.writeFile(filePath, jsonData, (err) => {
+  if (err) {
+    console.error('Error writing to JSON file:', err);
+  } else {
+    console.log('Data has been written to the JSON file successfully!');
+  }
+});
+
+      }
       
   console.log('adress',contractAddress)
   
