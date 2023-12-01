@@ -43,8 +43,8 @@ const Header = () => {
       </Link>
       <Spacer />
       
-      {data ? 
-        <Link as={NextLink} href={`/token/${membership}/${data[0].metadata.id}`} pl='10px'>
+      {!isLoading && data?.length! > 0 ? 
+        <Link as={NextLink} href={`/token/${membership}/${data![0].metadata.id}`} pl='10px'>
             <Icon as={FaUserAstronaut} boxSize={8} /> 
         </Link>
         

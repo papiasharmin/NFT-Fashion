@@ -21,7 +21,7 @@ const AIcustomize: NextPage = () => {
         method:'POST',
         headers:{
           "Content-Type": "application/json",
-          "Authorization": "Bearer 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",
+          Authorization: `Bearer ${process.env.OPENAI}`,
           "User-Agent":"Chrome"
 
         },
@@ -48,6 +48,7 @@ const AIcustomize: NextPage = () => {
             <Image src='' alt ='' />
 
           </Box>
+          <Spacer/>
           <Box>
             <form onSubmit={genarateImg}>
                 <FormControl>

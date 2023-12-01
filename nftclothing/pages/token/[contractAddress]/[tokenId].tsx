@@ -14,7 +14,7 @@ import {
   import { Signer } from "ethers";
   import newSmartWallet from "../../../components/smartWllet/smartWallet";
   import SmartWalletConnected from "../../../components/smartWllet/smartConnected";
-import { Box, Container, Heading } from "@chakra-ui/react";
+import { Box, Container, Flex, Heading } from "@chakra-ui/react";
 import { membership } from "../../../components/constant";
 import Header from "../../../components/Header";
 
@@ -60,7 +60,7 @@ import Header from "../../../components/Header";
        
        <Container  maxW='100vw' h='100vh' p={4} color='white'  bgColor='black'>
           <Header/>
-         <Box>
+         <Flex  alignContent='center' mt='10px'>
             <Box>
               <ThirdwebNftMedia
                 metadata={nft.metadata}
@@ -84,7 +84,7 @@ import Header from "../../../components/Header";
                 </Box>
               )}
             </Box>
-          </Box>
+          </Flex>
         </Container>
       </>
     );

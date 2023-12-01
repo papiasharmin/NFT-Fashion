@@ -39,25 +39,6 @@ export default async function handeler(
   
   
 
- 
-      
-     
-
-//       const presaleStartTime = new Date();
-// const publicSaleStartTime = new Date(Date.now() + 60 * 60 * 24 * 1000);
-// const claimConditions = [
-//   {
-//     startTime: presaleStartTime, // start the presale now
-//     maxClaimableSupply: 2, // limit how many mints for this presale
-//     price: 0.01, // presale price
-//     snapshot: ['0x...', '0x...'], // limit minting to only certain addresses
-//   },
-//   {
-//     startTime: publicSaleStartTime, // 24h after presale, start public sale
-//     price: 0.08, // public sale price
-//   }
-// ]
-//  await contract.erc721.claimConditions.set(claimConditions);
 
       
 

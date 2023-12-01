@@ -17,7 +17,7 @@ export default async function handeler(
         key,
         KlaytnTestnetBaobab,
         {
-          secretKey: "kLPaIW-HPpSd0y5h90iayq5FkaHxIP5O4xRlc4C1f2hY8rtQRu5i6UhLQP7g0NJ86nxxrCpXEVg56cIVAdpH9A", // Use secret key if using on the server, get it from dashboard settings
+          secretKey: process.env.THIRDWEB_SECRET_KEY, // Use secret key if using on the server, get it from dashboard settings
         },
       );
 

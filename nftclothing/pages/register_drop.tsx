@@ -176,9 +176,9 @@ const Register: NextPage = () => {
                 </>
                 :
                 <>
-                  {contracts.length > 0 && 
+                  {contracts.length > 0 ?
                     <Box>
-                      <Text bgColor='whitesmoke' color='black' p='' borderRadius='lg' fontSize='2xl'>List of drops</Text>
+                      <Text bgColor='whitesmoke' color='black' p='' borderRadius='lg' fontSize='2xl'>Contract Deployed</Text>
                       {
                         contracts.map((contract,index) => 
                         <Box key={index} border='1px solid whitesmoke' borderRadius='lg' p='5px' fontSize='md' fontWeight='bold' mt='10px'>
@@ -211,9 +211,12 @@ const Register: NextPage = () => {
                                >
                                  Lazy Mint NFTs
                               </Web3Button>
-                        </Box>)
+                        </Box>
+                       )
                       }  
                     </Box>
+                     :
+                     <Text bgColor='whitesmoke' color='black' p='' borderRadius='lg' fontSize='2xl'>No Contract Deployed Yet</Text>
                   }
 
                   <Text my='10%' fontSize='lg' fontFamily='h2' textAlign='center'>By dropping NFTs you can allow other people to claim and purchase NFTs directly</Text>

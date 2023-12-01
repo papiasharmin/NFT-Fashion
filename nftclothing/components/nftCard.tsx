@@ -67,7 +67,7 @@ const NftCard = ({nft}:Props) => {
     console.log('nftdata',nft, 'claim',claimConditions)
   
     return (
-        <Flex direction={"column"} backgroundColor={"#EEE"} justifyContent={"center"} padding={"2.5"} borderRadius={"6px"} borderColor={"lightgray"} borderWidth={1}>
+        <Flex color='black' direction={"column"} backgroundColor={"#EEE"} justifyContent={"center"} padding={"2.5"} borderRadius={"6px"} borderColor={"lightgray"} borderWidth={1}>
             <Box borderRadius={"4px"} overflow={"hidden"}>
                 <ThirdwebNftMedia metadata={nft.metadata} height={"100%"} width={"100%"} />
             </Box>
@@ -78,8 +78,9 @@ const NftCard = ({nft}:Props) => {
                 {loadingMarketplace || loadingDirectListing ? (
                     <Skeleton></Skeleton>
                 ) : directListing && directListing[0] ? (
+                    
                     <Box w='250px' h='400px'>
-                        <Flex direction={"column"}>
+                        <Flex direction={"column"} color='black'>
                             <Text fontSize={"small"}>Price</Text>
                             <Text fontSize={"small"}>{`${directListing[0]?.currencyValuePerToken.displayValue} ${directListing[0]?.currencyValuePerToken.symbol}`}</Text>
 
@@ -97,10 +98,14 @@ const NftCard = ({nft}:Props) => {
                             >
                                   Buy with Crypto
                         </Button>
+ 
                     </Box>
+           
+                    
                 ) : (
+                    
                     <Box >
-                        <Flex direction={"column"}>
+                        <Flex direction={"column"} color='black'>
                             <Text fontSize={"small"}>Price</Text>
                             <Text fontSize={"small"}>{`${claimConditions![0].currencyMetadata.displayValue} ${claimConditions![0].currencyMetadata.symbol}`}</Text>
                            
@@ -108,23 +113,28 @@ const NftCard = ({nft}:Props) => {
                            
                         </Flex>
                         <Button
-                               disabled={isLoading}
-                               onClick={paywithcard}
-                            >
-                                 Buy with Credit Card
-                            </Button>
-                            <Spacer/>
-                            <Button
-                               disabled={isLoading}
-                               onClick={() => claimNFT({ to: address, quantity: 1 })}
-                            >
-                                  Buy with Crypto
-                        </Button>
+                                           disabled={isLoading}
+                                           onClick={paywithcard}
+                                           
+                                        >
+                                             Buy with Credit Card
+                                        </Button>
+                                        <Spacer/>
+                                        <Button
+                                           disabled={isLoading}
+                                           onClick={() => claimNFT({ to: address, quantity: 1 })}
+                                        >
+                                              Buy with Crypto
+                                    </Button>
+ 
                     </Box>
+
+                                    
                 )}
             </Box>
+            
             {clientSecret ? (
-            <Box position='absolute' top='' left='' bgColor='whitesmoke' p='30px' borderRadius='10px' boxShadow='2xl' zIndex={2}>
+            <Box color='black' position='absolute' top='' left='' bgColor='whitesmoke' p='30px' borderRadius='10px' boxShadow='2xl' zIndex={2}>
             <Elements
                 options={{
                 clientSecret,

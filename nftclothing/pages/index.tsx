@@ -32,7 +32,7 @@ const Home: NextPage = () => {
               <Box boxShadow='2xl' border='12px solid whitesmoke'  borderTopRadius='full' borderBottomRadius='full' overflow='hidden' w='300px' h='500px'>
                 <Image src={`/images/nftclothimg12.png`} w='100%' h='100%' alt=""></Image>
               </Box>
-              <Box  boxShadow='2xl' dropShadow='2px 2px 5px whitesmoke' position='absolute' left='100px' top='10%' border='12px solid whitesmoke' borderTopRadius='full' borderBottomRadius='full' overflow='hidden' w='300px' h='500px'>
+              <Box  boxShadow='2xl' dropShadow='2px 2px 5px whitesmoke' position='absolute' left='150px' top='10%' border='12px solid whitesmoke' borderTopRadius='full' borderBottomRadius='full' overflow='hidden' w='300px' h='500px'>
                 <Image src={`/images/nftclothimg13.jpg`} w='100%' h='100%'  alt=""></Image>
               </Box>
               <Box  boxShadow='2xl' border='12px solid whitesmoke' borderTopRadius='full' borderBottomRadius='full' overflow='hidden' w='300px' h='500px'>
