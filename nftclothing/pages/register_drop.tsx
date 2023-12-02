@@ -23,7 +23,7 @@ const Register: NextPage = () => {
     const [isCreate, setisCreate] = useState(false);
     const [isembadded, setisembaded] = useState(false);
     const [mint, setMint] = useState(false);
-    const [contracts, setContract] = useState<ContractWithMetadata[]>([]);
+    const [contracts, setContract] = useState<string>('');
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
     const [key, setKey] = useState('');
@@ -42,6 +42,7 @@ const Register: NextPage = () => {
     const hiddenFileInput = useRef<HTMLInputElement>(null);
     const [nftmetadatasam, setNftmetadatasam] = useState('{name: "Hoodie 1",description: "This is a cool Hoodie",image: "", }');
     const [nftmetadata, setNftmetadata] = useState<string[]>([]);
+    const [nftmetadataup, setNftmetadataup] = useState<string>("");
 
     const readOnlySdk = new ThirdwebSDK(
       Mumbai,
@@ -87,10 +88,14 @@ const Register: NextPage = () => {
       })
 
       if(res.status === 200){
-        let con = await res.json()
-        console.log(con);
-
-        setContract(con.contract)
+        let con = await res.json();
+        console.log('condata',con);
+        con.contract?.data?.map((item:{user:string,contract:string})=>{
+          if(item.user === userAddr){
+            setContract(item.contract)
+          }
+        })
+        
        }
       
       
@@ -142,7 +147,7 @@ const Register: NextPage = () => {
                     nftmetadata.length > 0 ? 
                      <>
                         <FormLabel>Edit the name, description, media and other fields for each NFT</FormLabel>
-                        <Input type="text" w='100%' h='100%' defaultValue={nftmetadata} onChange={(e)=>setNftmetadata(e.target.value)} required/>
+                        <Input type="text" w='100%' h='100%' defaultValue={nftmetadata} onChange={(e)=>setNftmetadataup(e.target.value)} required/>
                      </>
                       : ""
                   }
@@ -181,16 +186,16 @@ const Register: NextPage = () => {
                 </>
                 :
                 <>
-                  {contracts.length > 0 ?
+                  {contracts ?
                     <Box>
                       <Text bgColor='whitesmoke' color='black' p='' borderRadius='lg' fontSize='2xl'>Contract Deployed</Text>
-                      {
-                        contracts.map((contract,index) => 
-                        <Box key={index} border='1px solid whitesmoke' borderRadius='lg' p='5px' fontSize='md' fontWeight='bold' mt='10px'>
-                          <Text>{contract.address}</Text>
+                      
+                    
+                        <Box  border='1px solid whitesmoke' borderRadius='lg' p='5px' fontSize='md' fontWeight='bold' mt='10px'>
+                          <Text>{contracts}</Text>
            
                           <Web3Button
-                            contractAddress={contract.address}
+                            contractAddress={contracts}
                             action={() =>
                                     lazyMint({
                                       // Metadata of the NFTs to upload
@@ -217,8 +222,8 @@ const Register: NextPage = () => {
                                  Lazy Mint NFTs
                               </Web3Button>
                         </Box>
-                       )
-                      }  
+                       
+                      
                     </Box>
                      :
                      <Text bgColor='whitesmoke' color='black' p='' borderRadius='lg' fontSize='2xl'>No Contract Deployed Yet</Text>

@@ -2,7 +2,8 @@ import {NextApiRequest, NextApiResponse} from "next";
 import { ThirdwebSDK } from "@thirdweb-dev/sdk"; 
 import { KlaytnTestnetBaobab, Mumbai} from "@thirdweb-dev/chains";
 import { ethers } from "ethers";
-
+import { contractdata } from "../../components/data";
+import fs from 'fs';
 export default async function handeler(
     req:NextApiRequest,
     res:NextApiResponse
@@ -20,10 +21,24 @@ export default async function handeler(
         },
       );
     
-      const contracts = await sdk.getContractList(address);
+      //const contracts = await sdk.getContractList(address);
       
-      console.log(contracts)
-      return res.status(200).json({contract: contracts})
+      const filePath = 'data.ts';
+     
+      
+      fs.readFile(filePath, 'utf8', (err, data) => {
+        if (err) {
+          console.error('Error reading JSON file:', err);
+        } else {
+          // Parse the JSON string into a JavaScript object
+          let jdata = JSON.parse(data)
+  
+          return res.status(200).json({contract: jdata})
+ 
+        }
+      });
+      
+      
 
    }catch(err){
     return res.status(500).json({error:err})
