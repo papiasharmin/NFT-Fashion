@@ -33,22 +33,12 @@ const Register: NextPage = () => {
     const userAddr = useAddress();
     const email = useEmbeddedWalletUserEmail();
     const sdk = ThirdwebSDK.fromPrivateKey(
-      'ae93e2399730c5f6708fe01b075b2a76e8947245dcc602b315359e052252f0c2',
+      process.env.KEY!,
       Mumbai,
       {
         clientId: process.env.NEXT_PUBLIC_TEMPLATE_CLIENT_ID, // Use secret key if using on the server, get it from dashboard settings
       },
     );
-    
-    console.log('EMAIL',email)
-
-    const { contract } = useContract('0x96F75E2635D4593Fe29c867E963417655918000d');
-    const { mutateAsync: lazyMint} = useLazyMint(contract);
-  
-    //const { data} = useUnclaimedNFTSupply(contract);
-
-
-   //console.log('nft',data)
     
     const hiddenFileInput = useRef<HTMLInputElement>(null);
     const [nftmetadata, setNftmetadata] = useState<{name:string,description:string,image:string}[]>([]);

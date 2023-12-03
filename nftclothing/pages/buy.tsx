@@ -1,4 +1,4 @@
-import { ConnectWallet } from "@thirdweb-dev/react";
+import { ConnectWallet, NFT } from "@thirdweb-dev/react";
 import NextLink from 'next/link';
 import { NextPage } from "next";
 import {  Heading, Container, Text, } from '@chakra-ui/react';
@@ -13,10 +13,19 @@ import { useEffect } from "react";
 import NFTGrid from "../components/nftGrid";
 import { nft_drop } from "../components/constant"; 
 import { useContract, useNFTs } from "@thirdweb-dev/react";
-
+import { ThirdwebSDK } from "@thirdweb-dev/react";
+import {Mumbai} from "@thirdweb-dev/chains";
 
 const Cart: NextPage = () => {
-    const [allcontract,setallcontract] = useState<string[]>([]);
+    const [alldata,setalldata] = useState<NFT[]>([]);
+
+    const sdk = ThirdwebSDK.fromPrivateKey(
+      process.env.KEY!,
+      Mumbai,
+      {
+        clientId: process.env.NEXT_PUBLIC_TEMPLATE_CLIENT_ID, // Use secret key if using on the server, get it from dashboard settings
+      },
+    );
 
     const getContract = async ()=>{
       const res = await fetch("/api/get-contract")
@@ -24,10 +33,22 @@ const Cart: NextPage = () => {
       if(res.status === 200){
         let con = await res.json();
         let arr:string[];
-        con.contract.map((item:{user:string,contract:string})=>{
+        con.contract.map(async(item:{user:string,contract:string})=>{
+          const contract = await sdk.getContract(item.contract);
 
-            // arr.push(item.contract)
-            // setallcontract(arr);
+          const data = await contract.erc721.getAll()
+
+          if(data.length > 0){
+            data.map((item:NFT )=>{
+              setalldata(prev=>{
+                let arr = prev;
+                arr.push(item)
+                return arr;
+              })
+            })
+          }
+
+         
         })
         console.log('condata',con);
 
@@ -50,7 +71,7 @@ const Cart: NextPage = () => {
         
         <NFTGrid 
                 isLoading={isLoading} 
-                data={data} 
+                data={alldata} 
                 emptyText={"No NFTs found"}
         /> 
       </Container>
