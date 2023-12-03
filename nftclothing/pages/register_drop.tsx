@@ -19,42 +19,60 @@ import Header from "../components/Header";
 
 
 const Register: NextPage = () => {
-    const [isMember, setisMember] = useState(false);
+   
     const [isCreate, setisCreate] = useState(false);
-    const [isembadded, setisembaded] = useState(false);
     const [mint, setMint] = useState(false);
     const [contracts, setContract] = useState<string>('');
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
+    const [nftimg, setImgurl] = useState<string>('');
+    const [nftname, setNftName] = useState('');
+    const [nftdescription, setNftDescription] = useState('');
     const [key, setKey] = useState('');
     const [getkey, setGetKey] = useState(false);
-    const [deployedContract, setdeployedContract ] = useState([]);//0x3576d5E1c1797102a4d9702dD7D6714928bCF241
     const userAddr = useAddress();
     const email = useEmbeddedWalletUserEmail();
+    const sdk = ThirdwebSDK.fromPrivateKey(
+      'ae93e2399730c5f6708fe01b075b2a76e8947245dcc602b315359e052252f0c2',
+      Mumbai,
+      {
+        clientId: process.env.NEXT_PUBLIC_TEMPLATE_CLIENT_ID, // Use secret key if using on the server, get it from dashboard settings
+      },
+    );
     
+    console.log('EMAIL',email)
 
-
-    const { contract } = useContract('0x611D059db8ad17a13167b2373267Fc7a334b7be0');
-  const { mutateAsync: lazyMint} = useLazyMint(contract);
+    const { contract } = useContract('0x96F75E2635D4593Fe29c867E963417655918000d');
+    const { mutateAsync: lazyMint} = useLazyMint(contract);
   
-  const { data} = useUnclaimedNFTSupply(contract);
+    //const { data} = useUnclaimedNFTSupply(contract);
+
+
+   //console.log('nft',data)
     
     const hiddenFileInput = useRef<HTMLInputElement>(null);
-    const [nftmetadatasam, setNftmetadatasam] = useState('{name: "Hoodie 1",description: "This is a cool Hoodie",image: "", }');
-    const [nftmetadata, setNftmetadata] = useState<string[]>([]);
-    const [nftmetadataup, setNftmetadataup] = useState<string>("");
-
-    const readOnlySdk = new ThirdwebSDK(
-      Mumbai,
-    {
-      clientId: process.env.NEXT_PUBLIC_TEMPLATE_CLIENT_ID, 
-    });
+    const [nftmetadata, setNftmetadata] = useState<{name:string,description:string,image:string}[]>([]);
 
     const handleClick = () => {
       
       hiddenFileInput?.current?.click();
     };
-    
+    const addnftmetadata = () =>{
+        const metadata = {
+          name: nftname,
+          description:nftdescription,
+          image:nftimg
+        }
+        setImgurl('');
+        setNftDescription('');
+        setNftName('');
+        setNftmetadata((prev) =>{
+          let arr = prev;
+          arr.push(metadata);
+          return arr;
+        })
+        console.log('ALLMETA',nftmetadata)
+    }
     
 
     const handleSubmit = async (e: FormEvent) =>{
@@ -79,46 +97,33 @@ const Register: NextPage = () => {
     }
 
     const getContract = async (userAddr: string)=>{
-      const res = await fetch("/api/get-contract",{
-        method:'POST',
-        body: JSON.stringify({
-           
-           address:userAddr,
-        })
-      })
+      const res = await fetch("/api/get-contract")
 
       if(res.status === 200){
         let con = await res.json();
         console.log('condata',con);
-        con.contract?.data?.map((item:{user:string,contract:string})=>{
+        con.contract.map(async (item:{user:string,contract:string})=>{
           if(item.user === userAddr){
+            const contract = await sdk.getContract(item.contract);
+
+            const data = await contract.erc721.getAll()
+            console.log('nftdata',data)
             setContract(item.contract)
           }
         })
-        
        }
-      
-      
     }
 
     useEffect(()=>{
-      if(userAddr && readOnlySdk){
-        
+      if(userAddr){     
         getContract(userAddr);
       }
+    },[userAddr])
 
-    },[])
+    useEffect(()=>{
 
-    console.log('data',data)
+    },[contracts])
 
-    
-
-
-  
-
-
-
- 
     return (
       <Container  maxW='100vw' h='fit-content' p={4} color='white'  bg='black'>
         <Header/>
@@ -129,41 +134,34 @@ const Register: NextPage = () => {
             <Box pr='10%' justifySelf='flex-start' alignSelf='center' mt='10px'>
               {isCreate?
                 mint ?
-                <form onSubmit={()=>lazyMint({metadatas:nftmetadata})}>
-                  <FormLabel>How Many NFTs you Want To Mint</FormLabel>
-                  <Input type="number" onChange={(e)=>{
-                     let arr = []
-                    for(let i=0; i < +e.target.value; i++){
-                         arr.push(nftmetadatasam); 
-
-                    }
-                    setNftmetadata(arr);
-                    }
+                <form onSubmit={async (e) => {
+                  e.preventDefault();
+                  addnftmetadata()
+                  const contract = await sdk.getContract(contracts);
+                      await contract?.erc721.lazyMint(nftmetadata)
                   
-                    }
-                    required
-                    />
-                  {
-                    nftmetadata.length > 0 ? 
-                     <>
-                        <FormLabel>Edit the name, description, media and other fields for each NFT</FormLabel>
-                        <Input type="text" w='100%' h='100%' defaultValue={nftmetadata} onChange={(e)=>setNftmetadataup(e.target.value)} required/>
-                     </>
-                      : ""
-                  }
-                  
-                  <Button>Mint</Button>
-
+                  }}>
+                   <FormControl>
+                      <FormHelperText mt='5px' bgColor='whitesmoke' color='black' p='' borderRadius='lg' fontSize='2xl'>Add NFT Metadata</FormHelperText>
+                      <FormLabel mt='5px'>Name of NFT</FormLabel>
+                      <Input type='text' placeholder="Name" value={nftname} onChange={(e)=> setNftName(e.target.value)} required/>
+                      <FormLabel mt='5px'>Give A description of the NFT</FormLabel>
+                      <Input type='text' placeholder="Description" value={nftdescription} onChange={(e)=> setNftDescription(e.target.value)} required/>
+                      <FormLabel mt='5px'>NFT image URL</FormLabel>
+                      <Input type='text' placeholder="Key" value={nftimg} onChange={(e)=> setImgurl(e.target.value)} required/> 
+                      <Button type='button' onClick={addnftmetadata}>Add another nft</Button>   
+                  </FormControl>
+                  <Button type="submit">Mint</Button>
                 </form>
                 :
                 <>
                 {getkey ?
-                                       <iframe
-                                       src={`https://embedded-wallet.thirdweb.com/sdk/2022-08-12/embedded-wallet/export?clientId=${"f0de2f56be44a9c35c502908aaf6a83f"}`}
-                                       allow="{clipboard-read 'self' https://embedded-wallet.thirdweb.com/sdk/2022-08-12/embedded-wallet/export?clientId=f0de2f56be44a9c35c502908aaf6a83f; clipboard-write 'self' https://embedded-wallet.thirdweb.com/sdk/2022-08-12/embedded-wallet/export?clientId=f0de2f56be44a9c35c502908aaf6a83f}"
-                                    />
-                                    :
-                                    ""
+                    <iframe
+                      src={`https://embedded-wallet.thirdweb.com/sdk/2022-08-12/embedded-wallet/export?clientId=${"f0de2f56be44a9c35c502908aaf6a83f"}`}
+                      allow="{clipboard-read 'self' https://embedded-wallet.thirdweb.com/sdk/2022-08-12/embedded-wallet/export?clientId=f0de2f56be44a9c35c502908aaf6a83f; clipboard-write 'self' https://embedded-wallet.thirdweb.com/sdk/2022-08-12/embedded-wallet/export?clientId=f0de2f56be44a9c35c502908aaf6a83f}"
+                    />
+                    :
+                    ""
                 }
                 <form onSubmit={handleSubmit}>
                   
@@ -189,41 +187,13 @@ const Register: NextPage = () => {
                   {contracts ?
                     <Box>
                       <Text bgColor='whitesmoke' color='black' p='' borderRadius='lg' fontSize='2xl'>Contract Deployed</Text>
-                      
-                    
                         <Box  border='1px solid whitesmoke' borderRadius='lg' p='5px' fontSize='md' fontWeight='bold' mt='10px'>
                           <Text>{contracts}</Text>
-           
-                          <Web3Button
-                            contractAddress={contracts}
-                            action={() =>
-                                    lazyMint({
-                                      // Metadata of the NFTs to upload
-                                       metadatas: [
-                                                 {
-                                                  name: "Hoodie 1",
-                                                  description: "This is a cool Hoodie",
-                                                  image: "https://img.joomcdn.net/cff862d46d494cc41e4d2af0840a85cbbb67881b_original.jpeg", 
-                                                 },
-                                                 {
-                                                  name: "Sneaker 1",
-                                                  description: "This is a cool Sneaker",
-                                                  image: "https://i.etsystatic.com/16489875/r/il/600ab8/3790184197/il_570xN.3790184197_jj0v.jpg", 
-                                                },
-                                                {
-                                                  name: "Bagpack 1",
-                                                  description: "This is a cool Bag",
-                                                  image: "https://i.ebayimg.com/images/g/8GYAAOSw4vRkvONW/s-l1600.png", 
-                                                },
-                                        ]
-                                      })
-                                    }
-                               >
-                                 Lazy Mint NFTs
-                              </Web3Button>
+                          <Button onClick={()=> {
+                            setisCreate(true)
+                            setMint(true)
+                          }}>Lazy Mint NFT</Button>
                         </Box>
-                       
-                      
                     </Box>
                      :
                      <Text bgColor='whitesmoke' color='black' p='' borderRadius='lg' fontSize='2xl'>No Contract Deployed Yet</Text>
@@ -243,17 +213,53 @@ const Register: NextPage = () => {
   
   export default Register;
 
-  // <FormLabel>Upload image for contract</FormLabel>
-  // {img && <Image src={`${img}`} alt="" w='30px' h='30px'/>
- 
-  // }
-  //   <label htmlFor="inputTag" >
-  //     Select Image <br/>
-      
-  //     <Icon as={FaCamera} boxSize={8}  onClick={handleClick}/>
-  //    <input id="inputTag" type="file" style={{display:'none'}} onChange={(e)=> setImg(e.target.value)} ref={hiddenFileInput}/>
-  //    <br/>
+  // <Web3Button
+  // contractAddress={contracts}
+  // action={() =>
+  //         lazyMint({
+  //           // Metadata of the NFTs to upload
+  //            metadatas: [
+  //                      {
+  //                       name: "Hoodie 1",
+  //                       description: "This is a cool Hoodie",
+  //                       image: "https://img.joomcdn.net/cff862d46d494cc41e4d2af0840a85cbbb67881b_original.jpeg", 
+  //                      },
+  //                      {
+  //                       name: "Sneaker 1",
+  //                       description: "This is a cool Sneaker",
+  //                       image: "https://i.etsystatic.com/16489875/r/il/600ab8/3790184197/il_570xN.3790184197_jj0v.jpg", 
+  //                     },
+  //                     {
+  //                       name: "Bagpack 1",
+  //                       description: "This is a cool Bag",
+  //                       image: "https://i.ebayimg.com/images/g/8GYAAOSw4vRkvONW/s-l1600.png", 
+  //                     },
+  //             ]
+  //           })
+  //         }
+  //    >
+  //      Lazy Mint NFTs
+  //   </Web3Button>
 
-  //   </label>
-  
-//kLPaIW-HPpSd0y5h90iayq5FkaHxIP5O4xRlc4C1f2hY8rtQRu5i6UhLQP7g0NJ86nxxrCpXEVg56cIVAdpH9A
+  /////////////
+
+//   <Input type="number" onChange={(e)=>{
+//     let arr = []
+//    for(let i=0; i < +e.target.value; i++){
+//         arr.push(nftmetadatasam); 
+
+//    }
+//    setNftmetadata(arr);
+//    }
+ 
+//    }
+//    required
+//    />
+//  {
+//    nftmetadata.length > 0 ? 
+//     <>
+//        <FormLabel>Edit the name, description, media and other fields for each NFT</FormLabel>
+//        <Input type="text" w='100%' h='100%' defaultValue={nftmetadata} onChange={(e)=>setNftmetadataup(e.target.value)} required/>
+//     </>
+//      : ""
+//  }
